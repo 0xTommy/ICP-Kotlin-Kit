@@ -24,8 +24,7 @@ class FetchTokensBalance internal constructor(
      */
     operator fun invoke(principal: ICPPrincipal): Flow<ICPTokenBalance> = flow {
 
-        val result = fetchAllTokens()
-        val tokens = result.getOrElse {
+        val tokens = fetchAllTokens().getOrElse {
             throw it
         }
 

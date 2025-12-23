@@ -1,7 +1,9 @@
 package com.bity.icp_kotlin_kit.di
 
 import com.bity.icp_kotlin_kit.data.factory.TokenRepositoryFactoryImpl
+import com.bity.icp_kotlin_kit.data.factory.TransactionRepositoryFactoryImpl
 import com.bity.icp_kotlin_kit.domain.factory.TokenRepositoryFactory
+import com.bity.icp_kotlin_kit.domain.factory.TransactionRepositoryFactory
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchAllNFTCollections
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollection
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollectionTokenOwner
@@ -12,6 +14,7 @@ import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenBalance
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenTransactionFee
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokensBalance
 import com.bity.icp_kotlin_kit.domain.use_case.token.SendToken
+import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchAccountTransactions
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchTokenTransactions
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.GetTransactionExplorerUrl
 
@@ -19,6 +22,13 @@ object DomainModule {
 
     internal val tokenRepositoryFactory: TokenRepositoryFactory by lazy {
         TokenRepositoryFactoryImpl()
+    }
+
+    internal val transactionRepositoryFactory: TransactionRepositoryFactory by lazy {
+        TransactionRepositoryFactoryImpl(
+            snsService = DataModule.snsCachedRepository,
+            indexService = DataModule.icpIndexService
+        )
     }
 
     fun provideFetchTokensBalance(): FetchTokensBalance =
@@ -36,6 +46,17 @@ object DomainModule {
     fun provideFetchTokenBalance(): FetchTokenBalance =
         FetchTokenBalance(
             tokenRepositoryFactory = tokenRepositoryFactory
+        )
+
+    fun provideFetchAccountTransactions() : FetchAccountTransactions =
+        FetchAccountTransactions(
+            fetchAllTokens = provideFetchAllTokens(),
+            fetchTokenTransactions = provideFetchTokenTransactions()
+        )
+
+    fun provideFetchTokenTransactions() : FetchTokenTransactions =
+        FetchTokenTransactions(
+            transactionRepositoryFactory = transactionRepositoryFactory
         )
 
 }

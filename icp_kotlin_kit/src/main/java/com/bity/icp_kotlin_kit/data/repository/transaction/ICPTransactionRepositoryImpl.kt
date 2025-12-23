@@ -11,15 +11,6 @@ internal class ICPTransactionRepositoryImpl(
     private val transactionRepositoryFactory: TransactionRepositoryFactory
 ) : ICPTransactionRepository {
 
-    override suspend fun fetchTokenTransactions(
-        account: ICPAccount,
-        token: ICPToken,
-    ): List<ICPTokenTransaction> {
-        val repository = transactionRepositoryFactory.getTransactionRepository(token)
-            ?: throw ICPKitException.TokenNotSupported(token)
-        return repository.fetchAllTransactions(account)
-    }
-
     override suspend fun getTransactionExplorerURL(
         token: ICPToken,
         transactionId: String,

@@ -43,6 +43,18 @@ internal object DataModule {
         )
     }
 
+    val snsCachedRepository: SNSCachedRepository by lazy {
+        SNSCachedRepositoryImpl(
+            canister = nnsSNSWService
+        )
+    }
+
+    val icpIndexService: NNSICPIndexCanister.NNSICPIndexCanisterService by lazy {
+        NNSICPIndexCanister.NNSICPIndexCanisterService(
+            canister = ICPSystemCanisters.Index.icpPrincipal
+        )
+    }
+
 }
 
 private const val BASE_URL: String = "https://icp-api.io/api/v2/canister/"
@@ -90,21 +102,9 @@ val nftCollectionIdService: NFTCollectionIdService by lazy {
 * Canister from generated file
  */
 
-private val icpIndexService: NNSICPIndexCanister.NNSICPIndexCanisterService by lazy {
-    NNSICPIndexCanister.NNSICPIndexCanisterService(
-        canister = ICPSystemCanisters.Index.icpPrincipal
-    )
-}
-
 internal val nnsSNSWService: NNS_SNS_W.nns_sns_wService by lazy {
     NNS_SNS_W.nns_sns_wService(
         canister = ICPSystemCanisters.NNS_SNS_W.icpPrincipal
-    )
-}
-
-private val snsCachedRepository: SNSCachedRepository by lazy {
-    SNSCachedRepositoryImpl(
-        canister = nnsSNSWService
     )
 }
 
@@ -124,21 +124,10 @@ private val ledgerCanisterService: LedgerCanister.LedgerCanisterService by lazy 
  * Factory
  */
 
-internal val transactionRepositoryFactory: TransactionRepositoryFactory by lazy {
-    TransactionRepositoryFactoryImpl(
-        snsService = snsCachedRepository,
-        indexService = icpIndexService
-    )
-}
+
 
 internal val nftRepositoryFactory: NFTRepositoryFactory by lazy {
     NFTRepositoryFactoryImpl()
-}
-
-internal val icpTransactionRepository: ICPTransactionRepository by lazy {
-    ICPTransactionRepositoryImpl(
-        transactionRepositoryFactory = transactionRepositoryFactory
-    )
 }
 
 /**
