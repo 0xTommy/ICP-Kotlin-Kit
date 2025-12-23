@@ -1,8 +1,7 @@
-package com.bity.icp_kotlin_kit.domain.use_case.token
+package com.bity.icp_kotlin_kit.domain.use_case.transaction
 
 import com.bity.icp_kotlin_kit.domain.factory.TokenRepositoryFactory
 import com.bity.icp_kotlin_kit.domain.model.ICPToken
-import com.bity.icp_kotlin_kit.domain.repository.TokenRepository
 import com.bity.icp_kotlin_kit.util.logger.ICPKitLogger
 import java.math.BigInteger
 

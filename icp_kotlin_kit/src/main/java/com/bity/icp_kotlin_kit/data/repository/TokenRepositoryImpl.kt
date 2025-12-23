@@ -32,15 +32,6 @@ internal class TokenRepositoryImpl(
             .map { it.toDomainModel() }
     }
 
-    override suspend fun send(transferArgs: ICPTokenTransferArgs): ICPTokenTransfer {
-        TODO()
-        /*val repository = tokenRepositoryFactory.createRepository(
-            standard = transferArgs.token.standard,
-            canister = transferArgs.token.canister
-        )
-        return repository.transfer(transferArgs)*/
-    }
-
 }
 
 private fun ICRC1Oracle.ICRC1.toDomainModel(): ICPToken =

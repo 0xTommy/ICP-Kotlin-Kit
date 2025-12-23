@@ -8,5 +8,4 @@ import java.math.BigInteger
 internal interface TokenRepository {
     suspend fun getTokenCount(): ULong
     suspend fun fetchTokensPage(startAt: ULong, pageSize: ULong): List<ICPToken>
-    suspend fun send(transferArgs: ICPTokenTransferArgs): ICPTokenTransfer
 }

@@ -39,4 +39,9 @@ sealed class ICPKitException(message: String? = null) : Exception(message) {
         canister: ICPPrincipal
     ): ICPKitException("Unable to create repository for token with standard $standard and canister $canister")
 
+    class InvalidBlocksLength(
+        expected: Int,
+        returned: Int
+    ) : ICPKitException("Expected $expected blocks, but returned $returned")
+
 }

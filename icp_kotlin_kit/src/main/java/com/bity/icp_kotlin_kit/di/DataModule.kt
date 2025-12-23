@@ -55,6 +55,12 @@ internal object DataModule {
         )
     }
 
+    val ledgerCanisterService: LedgerCanister.LedgerCanisterService by lazy {
+        LedgerCanister.LedgerCanisterService(
+            canister = ICPSystemCanisters.Ledger.icpPrincipal
+        )
+    }
+
 }
 
 private const val BASE_URL: String = "https://icp-api.io/api/v2/canister/"
@@ -85,12 +91,6 @@ internal val icpCanisterRepository: ICPCanisterRepository by lazy {
     )
 }
 
-internal val ledgerCanisterRepository: LedgerCanisterRepository by lazy {
-    LedgerCanisterRepositoryImpl(
-        ledgerCanisterService = ledgerCanisterService
-    )
-}
-
 /**
  * Service
  */
@@ -111,12 +111,6 @@ internal val nnsSNSWService: NNS_SNS_W.nns_sns_wService by lazy {
 private val dabNFTService: DABNFT.DABNFTService by lazy {
     DABNFT.DABNFTService(
         canister = ICPSystemCanisters.NFTRegistry.icpPrincipal
-    )
-}
-
-private val ledgerCanisterService: LedgerCanister.LedgerCanisterService by lazy {
-    LedgerCanister.LedgerCanisterService(
-        canister = ICPSystemCanisters.Ledger.icpPrincipal
     )
 }
 

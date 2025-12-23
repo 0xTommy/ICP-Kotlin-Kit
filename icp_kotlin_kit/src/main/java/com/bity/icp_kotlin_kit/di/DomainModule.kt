@@ -11,12 +11,13 @@ import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollectionTokens
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchUserNFTTokensHolding
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchAllTokens
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenBalance
-import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenTransactionFee
+import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchTokenTransactionFee
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokensBalance
-import com.bity.icp_kotlin_kit.domain.use_case.token.SendToken
+import com.bity.icp_kotlin_kit.domain.use_case.transaction.SendToken
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchAccountTransactions
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchTokenTransactions
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.GetTransactionExplorerUrl
+import com.bity.icp_kotlin_kit.domain.use_case.transaction.SendICP
 
 object DomainModule {
 
@@ -62,6 +63,16 @@ object DomainModule {
     fun provideFetchTokenTransactionFee() : FetchTokenTransactionFee =
         FetchTokenTransactionFee(
             tokenRepositoryFactory = tokenRepositoryFactory
+        )
+
+    fun provideSendToken() : SendToken =
+        SendToken(
+            tokenRepositoryFactory = tokenRepositoryFactory
+        )
+
+    fun provideSendICP() : SendICP =
+        SendICP(
+            repository = RepositoryModule.ledgerCanisterRepository
         )
 
 }
