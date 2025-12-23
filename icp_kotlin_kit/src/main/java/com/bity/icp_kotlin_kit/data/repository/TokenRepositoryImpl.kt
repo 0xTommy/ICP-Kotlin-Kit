@@ -32,15 +32,6 @@ internal class TokenRepositoryImpl(
             .map { it.toDomainModel() }
     }
 
-    override suspend fun fee(token: ICPToken): BigInteger {
-        TODO()
-        /*val repository = tokenRepositoryFactory.createRepository(
-            standard = token.standard,
-            canister = token.canister
-        )
-        return repository.fee()*/
-    }
-
     override suspend fun send(transferArgs: ICPTokenTransferArgs): ICPTokenTransfer {
         TODO()
         /*val repository = tokenRepositoryFactory.createRepository(

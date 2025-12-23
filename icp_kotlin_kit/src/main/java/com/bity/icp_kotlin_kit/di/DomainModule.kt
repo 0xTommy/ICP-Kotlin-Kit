@@ -59,6 +59,11 @@ object DomainModule {
             transactionRepositoryFactory = transactionRepositoryFactory
         )
 
+    fun provideFetchTokenTransactionFee() : FetchTokenTransactionFee =
+        FetchTokenTransactionFee(
+            tokenRepositoryFactory = tokenRepositoryFactory
+        )
+
 }
 
 /**
