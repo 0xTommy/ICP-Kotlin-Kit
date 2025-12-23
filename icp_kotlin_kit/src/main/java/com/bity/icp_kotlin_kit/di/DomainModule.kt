@@ -1,16 +1,44 @@
 package com.bity.icp_kotlin_kit.di
 
+import com.bity.icp_kotlin_kit.data.factory.TokenRepositoryFactoryImpl
+import com.bity.icp_kotlin_kit.domain.factory.TokenRepositoryFactory
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchAllNFTCollections
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollection
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollectionTokenOwner
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollectionTokens
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchUserNFTTokensHolding
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchAllTokens
+import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenBalance
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokenTransactionFee
 import com.bity.icp_kotlin_kit.domain.use_case.token.FetchTokensBalance
 import com.bity.icp_kotlin_kit.domain.use_case.token.SendToken
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.FetchTokenTransactions
 import com.bity.icp_kotlin_kit.domain.use_case.transaction.GetTransactionExplorerUrl
+
+object DomainModule {
+
+    internal val tokenRepositoryFactory: TokenRepositoryFactory by lazy {
+        TokenRepositoryFactoryImpl()
+    }
+
+    fun provideFetchTokensBalance(): FetchTokensBalance =
+        FetchTokensBalance(
+            fetchAllTokens = provideFetchAllTokens(),
+            fetchTokenBalance = provideFetchTokenBalance()
+        )
+
+    fun provideFetchAllTokens(): FetchAllTokens =
+        FetchAllTokens(
+            tokenCache = RepositoryModule.tokenCache,
+            tokenRepository = RepositoryModule.tokenRepository
+        )
+
+    fun provideFetchTokenBalance(): FetchTokenBalance =
+        FetchTokenBalance(
+            tokenRepositoryFactory = tokenRepositoryFactory
+        )
+
+}
 
 /**
  * NFT Use Cases
@@ -42,49 +70,5 @@ val fetchNFTCollectionTokenOwner by lazy {
 val fetchUserNFTTokensHolding by lazy {
     FetchUserNFTTokensHolding(
         nftCachedRepository = nftCachedRepository
-    )
-}
-
-/**
- * Tokens Use Cases
- */
-val fetchTokensBalance by lazy {
-    FetchTokensBalance(
-        tokenRepository = tokenCachedRepository
-    )
-}
-
-val fetchAllTokens by lazy {
-    FetchAllTokens(
-        tokenRepository = tokenCachedRepository
-    )
-}
-
-val fetchTokenTransactionFee by lazy {
-    FetchTokenTransactionFee(
-        tokenRepository = tokenCachedRepository
-    )
-}
-
-val sendToken by lazy {
-    SendToken(
-        tokenRepository = tokenCachedRepository
-    )
-}
-
-/**
- * Transaction Use Cases
- */
-val getTransactionExplorerUrl by lazy {
-    GetTransactionExplorerUrl(
-        tokenRepository = tokenCachedRepository,
-        transactionRepository = icpTransactionRepository
-    )
-}
-
-val fetchTokenTransactions by lazy {
-    FetchTokenTransactions(
-        tokenRepository = tokenCachedRepository,
-        transactionRepository = icpTransactionRepository
     )
 }

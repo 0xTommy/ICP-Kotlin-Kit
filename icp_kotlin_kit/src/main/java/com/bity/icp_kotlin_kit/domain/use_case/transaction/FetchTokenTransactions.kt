@@ -6,10 +6,10 @@ import com.bity.icp_kotlin_kit.domain.model.ICPPrincipal
 import com.bity.icp_kotlin_kit.domain.model.ICPToken
 import com.bity.icp_kotlin_kit.domain.model.token_transaction.ICPTokenTransaction
 import com.bity.icp_kotlin_kit.domain.repository.ICPTransactionRepository
-import com.bity.icp_kotlin_kit.domain.repository.TokenCachedRepository
+import com.bity.icp_kotlin_kit.domain.repository.TokenRepository
 
 class FetchTokenTransactions internal constructor(
-    private val tokenRepository: TokenCachedRepository,
+    private val tokenRepository: TokenRepository,
     private val transactionRepository: ICPTransactionRepository
 ) {
 
@@ -25,10 +25,11 @@ class FetchTokenTransactions internal constructor(
         account: ICPAccount,
         tokenCanister: ICPPrincipal,
     ): List<ICPTokenTransaction> {
-        val token = tokenRepository.fetchAllTokens()
+        TODO()
+        /*val token = tokenRepository.fetchAllTokens()
             .firstOrNull { it.canister.string == tokenCanister.string }
             ?: throw ICPKitException.TokenNotFound(tokenCanister)
-        return transactionRepository.fetchTokenTransactions(account, token)
+        return transactionRepository.fetchTokenTransactions(account, token)*/
     }
 
 }
