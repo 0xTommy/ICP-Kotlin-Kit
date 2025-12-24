@@ -4,6 +4,7 @@ import com.bity.icp_kotlin_kit.data.factory.TokenRepositoryFactoryImpl
 import com.bity.icp_kotlin_kit.data.factory.TransactionRepositoryFactoryImpl
 import com.bity.icp_kotlin_kit.domain.factory.TokenRepositoryFactory
 import com.bity.icp_kotlin_kit.domain.factory.TransactionRepositoryFactory
+import com.bity.icp_kotlin_kit.domain.use_case.QueryBlocks
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchAllNFTCollections
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollection
 import com.bity.icp_kotlin_kit.domain.use_case.nft.FetchNFTCollectionTokenOwner
@@ -72,6 +73,11 @@ object DomainModule {
 
     fun provideSendICP() : SendICP =
         SendICP(
+            repository = RepositoryModule.ledgerCanisterRepository
+        )
+
+    fun provideQueryBlocks() : QueryBlocks =
+        QueryBlocks(
             repository = RepositoryModule.ledgerCanisterRepository
         )
 
