@@ -9,7 +9,6 @@ import com.bity.icp_kotlin_kit.data.repository.LedgerCanisterRepositoryImpl
 import com.bity.icp_kotlin_kit.data.repository.NFTCachedRepositoryImpl
 import com.bity.icp_kotlin_kit.data.repository.SNSCachedRepositoryImpl
 import com.bity.icp_kotlin_kit.data.repository.TokenRepositoryImpl
-import com.bity.icp_kotlin_kit.data.repository.transaction.ICPTransactionRepositoryImpl
 import com.bity.icp_kotlin_kit.data.service.nft.NFTCollectionIdServiceImpl
 import com.bity.icp_kotlin_kit.domain.factory.NFTRepositoryFactory
 import com.bity.icp_kotlin_kit.domain.factory.TokenRepositoryFactory
@@ -21,7 +20,6 @@ import com.bity.icp_kotlin_kit.data.generated_file.NNSICPIndexCanister
 import com.bity.icp_kotlin_kit.data.generated_file.NNS_SNS_W
 import com.bity.icp_kotlin_kit.domain.model.enum.ICPSystemCanisters
 import com.bity.icp_kotlin_kit.domain.repository.ICPCanisterRepository
-import com.bity.icp_kotlin_kit.domain.repository.ICPTransactionRepository
 import com.bity.icp_kotlin_kit.domain.repository.LedgerCanisterRepository
 import com.bity.icp_kotlin_kit.domain.repository.NFTCachedRepository
 import com.bity.icp_kotlin_kit.domain.repository.SNSCachedRepository
