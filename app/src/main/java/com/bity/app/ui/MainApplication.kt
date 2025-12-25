@@ -2,7 +2,6 @@ package com.bity.app.ui
 
 import android.app.Application
 import android.util.Log
-import com.bity.app.di.appModule
 import com.bity.icp_kotlin_kit.util.logger.ICPKitLogHandler
 import com.bity.icp_kotlin_kit.util.logger.ICPKitLogger
 import org.koin.android.ext.koin.androidContext
@@ -18,7 +17,6 @@ class MainApplication: Application() {
     private fun initKoin() {
         GlobalContext.startKoin {
             androidContext(this@MainApplication)
-            modules(appModule)
         }
     }
 
